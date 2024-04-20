@@ -22,7 +22,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <Header />
         <main className="min-h-full w-full p-4 flex flex-col items-center max-w-xl mx-auto space-y-5">
-          <Toaster />
+          <Toaster richColors theme="system" />
           {children}
         </main>
         <Footer />

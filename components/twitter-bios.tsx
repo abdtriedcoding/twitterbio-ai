@@ -3,20 +3,30 @@ import { Skeleton } from "./ui/skeleton";
 import { Card, CardContent } from "@/components/ui/card";
 
 export default function TwitterBios({
+  bioRef,
   isLoading,
   bios,
 }: {
+  bioRef: any;
   isLoading: boolean;
   bios: string[];
 }) {
   return bios.map((bio, index) => (
-    <BioCard key={index} isLoading={isLoading} bio={bio} />
+    <BioCard bioRef={bioRef} key={index} isLoading={isLoading} bio={bio} />
   ));
 }
 
-function BioCard({ isLoading, bio }: { isLoading: boolean; bio: string }) {
+function BioCard({
+  bioRef,
+  isLoading,
+  bio,
+}: {
+  bioRef: any;
+  isLoading: boolean;
+  bio: string;
+}) {
   return (
-    <Card className="w-full">
+    <Card ref={bioRef} className="w-full">
       <CardContent>
         {isLoading && <Skeleton className="w-full h-6 rounded-full" />}
         {!isLoading && (
