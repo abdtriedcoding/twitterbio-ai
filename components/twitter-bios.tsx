@@ -1,20 +1,16 @@
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Copy } from "lucide-react";
 import CopyButton from "./copy-button";
+import { Card, CardContent } from "@/components/ui/card";
 
 export default function TwitterBios({ bios }: { bios: string[] }) {
+  return bios.map((bio, index) => <BioCard key={index} bio={bio} />);
+}
+
+function BioCard({ bio }: { bio: string }) {
   return (
     <Card className="w-full">
       <CardContent>
-        <p>Card Content</p>
-        <CopyButton />
+        <p>{bio}</p>
+        <CopyButton bio={bio} />
       </CardContent>
     </Card>
   );

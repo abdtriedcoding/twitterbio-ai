@@ -66,7 +66,8 @@ export function InfoForm() {
 
     complete(prompt);
   }
-  const bios = completion.split("▲");
+
+  const bios = completion.split("▲").filter(Boolean);
 
   return (
     <>
@@ -135,7 +136,7 @@ export function InfoForm() {
           </Button>
         </form>
       </Form>
-      <TwitterBios bios={bios} />
+      {bios.length > 0 && <TwitterBios bios={bios} />}
     </>
   );
 }
