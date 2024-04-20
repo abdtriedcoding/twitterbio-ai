@@ -1,6 +1,7 @@
+import "./globals.css";
+import { Toaster } from "sonner";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import "./globals.css";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 
@@ -21,6 +22,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <Header />
         <main className="min-h-full w-full p-4 flex flex-col items-center max-w-xl mx-auto space-y-5">
+          <Toaster />
           {children}
         </main>
         <Footer />

@@ -1,6 +1,7 @@
 "use client";
 
 import { z } from "zod";
+import { toast } from "sonner";
 import TwitterBios from "./twitter-bios";
 import { useCompletion } from "ai/react";
 import { useForm } from "react-hook-form";
@@ -40,7 +41,11 @@ const formSchema = z.object({
 });
 
 export function InfoForm() {
-  const { complete, completion, isLoading } = useCompletion();
+  const { complete, completion, isLoading } = useCompletion({
+    onError: (e) => {
+      toast.error(e.message);
+    },
+  });
 
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({

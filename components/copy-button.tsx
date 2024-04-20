@@ -1,3 +1,4 @@
+import { toast } from "sonner";
 import { useState } from "react";
 import { Check, Copy } from "lucide-react";
 
@@ -8,6 +9,7 @@ export default function CopyButton({ bio }: { bio: string }) {
   const handleCopy = () => {
     setCopy(true);
     navigator.clipboard.writeText(bio);
+    toast.success("Copied to clipboard");
     setTimeout(() => {
       setCopy(false);
     }, 3000);
