@@ -1,4 +1,5 @@
 import { Badge } from "@/components/ui/badge";
+import { InfoForm } from "@/components/info-form";
 
 export default function Home() {
   return (
@@ -10,6 +11,7 @@ export default function Home() {
       <h1 className="sm:text-6xl text-4xl max-w-2xl text-center font-bold">
         Generate your next Twitter bio using AI
       </h1>
+      <InfoForm />
     </>
   );
 }
