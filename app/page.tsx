@@ -8,8 +8,8 @@ export default function Home() {
         <b>26,299</b>
         <p>bios generated so far</p>
       </Badge>
-      <h1 className="sm:text-6xl text-4xl max-w-2xl text-center font-bold">
-        Generate your next Twitter bio using AI
+      <h1 className="sm:text-5xl text-4xl text-center font-bold">
+        Generate your Twitter bio using AI
       </h1>
       <InfoForm />
     </>
