@@ -14,6 +14,7 @@ export default function Header() {
 
       <Button asChild>
         <Link
+          className="space-x-2"
           target="_blank"
           href={"https://github.com/abdtriedcoding/twitterbio-ai"}
         >
