@@ -1,11 +1,10 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { Textarea } from "@/components/ui/textarea";
+import { useForm } from "react-hook-form";
+import { ArrowRight } from "lucide-react";
+import { zodResolver } from "@hookform/resolvers/zod";
 
-import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -21,10 +20,20 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
 
 const formSchema = z.object({
-  username: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
+  job: z
+    .string()
+    .min(3, {
+      message: "job must be at least 3 characters.",
+    })
+    .max(160, {
+      message: "job must not be longer than 160 characters.",
+    }),
+  vibe: z.string({
+    required_error: "please select vibe.",
   }),
 });
 
@@ -33,7 +42,7 @@ export function InfoForm() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      username: "",
+      job: "",
     },
   });
 
@@ -46,20 +55,26 @@ export function InfoForm() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 w-full">
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="space-y-4 w-full pt-8"
+      >
         <FormField
           control={form.control}
-          name="username"
+          name="job"
           render={({ field }) => (
             <FormItem>
               <FormLabel>
-                <div>
-                  Drop in your job <span>(or your favourite hobby).</span>
+                <div className="font-medium">
+                  Drop in your job{" "}
+                  <span className="text-slate-500">
+                    (or your favourite hobby).
+                  </span>
                 </div>
               </FormLabel>
               <FormControl>
                 <Textarea
-                  placeholder="Tell us a little bit about yourself"
+                  placeholder={"e.g. Amazon CEO"}
                   className="resize-none"
                   {...field}
                 />
@@ -70,27 +85,30 @@ export function InfoForm() {
         />
         <FormField
           control={form.control}
-          name="email"
+          name="vibe"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Email</FormLabel>
+              <FormLabel>Select your vibe.</FormLabel>
               <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <FormControl>
                   <SelectTrigger>
-                    <SelectValue placeholder="Select a verified email to display" />
+                    <SelectValue placeholder="Select vibe" />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  <SelectItem value="m@example.com">m@example.com</SelectItem>
-                  <SelectItem value="m@google.com">m@google.com</SelectItem>
-                  <SelectItem value="m@support.com">m@support.com</SelectItem>
+                  <SelectItem value="Professional">Professional</SelectItem>
+                  <SelectItem value="Casual">Casual</SelectItem>
+                  <SelectItem value="Funny">Funny</SelectItem>
                 </SelectContent>
               </Select>
               <FormMessage />
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        <Button className="w-full" type="submit">
+          Generate your job
+          <ArrowRight className="w-5 h-5" />
+        </Button>
       </form>
     </Form>
   );
