@@ -1,8 +1,10 @@
 "use client";
 
 import { z } from "zod";
+import TwitterBios from "./twitter-bios";
+import { useCompletion } from "ai/react";
 import { useForm } from "react-hook-form";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Loader } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import {
@@ -22,7 +24,6 @@ import {
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { useCompletion } from "ai/react";
 
 const formSchema = z.object({
   job: z
@@ -124,14 +125,17 @@ export function InfoForm() {
             )}
           />
           <Button disabled={isLoading} className="w-full" type="submit">
-            Generate your job
-            <ArrowRight className="w-5 h-5" />
+            {isLoading && <Loader className="animate-spin h-5 w-5" />}
+            {!isLoading && (
+              <>
+                Generate your job
+                <ArrowRight className="w-5 h-5" />
+              </>
+            )}
           </Button>
         </form>
       </Form>
-      {bios.map((e, index) => (
-        <p key={index}>{e.trim()}</p>
-      ))}
+      <TwitterBios bios={bios} />
     </>
   );
 }
