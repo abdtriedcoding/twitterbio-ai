@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { Check, Copy } from "lucide-react";
 
-export default function CopyButton() {
+export default function CopyButton({ bio }: { bio: string }) {
   const [copy, setCopy] = useState(false);
   const iconClassName = "w-4 h-4 cursor-pointer ml-auto";
 
   const handleCopy = () => {
     setCopy(true);
-    navigator.clipboard.writeText("Software Engineer");
+    navigator.clipboard.writeText(bio);
     setTimeout(() => {
       setCopy(false);
     }, 3000);
