@@ -1,6 +1,6 @@
 import CopyButton from "./copy-button";
-import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "./ui/skeleton";
+import { Card, CardContent } from "@/components/ui/card";
 
 export default function TwitterBios({
   isLoading,
