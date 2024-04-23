@@ -136,7 +136,7 @@ export function InfoForm() {
           </Button>
         </form>
       </Form>
-      {bios.length > 0 && <TwitterBios bios={bios} />}
+      {bios.length > 0 && <TwitterBios isLoading={isLoading} bios={bios} />}
     </>
   );
 }

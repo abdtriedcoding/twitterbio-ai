@@ -1,16 +1,30 @@
 import CopyButton from "./copy-button";
 import { Card, CardContent } from "@/components/ui/card";
+import { Skeleton } from "./ui/skeleton";
 
-export default function TwitterBios({ bios }: { bios: string[] }) {
-  return bios.map((bio, index) => <BioCard key={index} bio={bio} />);
+export default function TwitterBios({
+  isLoading,
+  bios,
+}: {
+  isLoading: boolean;
+  bios: string[];
+}) {
+  return bios.map((bio, index) => (
+    <BioCard key={index} isLoading={isLoading} bio={bio} />
+  ));
 }
 
-function BioCard({ bio }: { bio: string }) {
+function BioCard({ isLoading, bio }: { isLoading: boolean; bio: string }) {
   return (
     <Card className="w-full">
       <CardContent>
-        <p>{bio}</p>
-        <CopyButton bio={bio} />
+        {isLoading && <Skeleton className="w-full h-6 rounded-full" />}
+        {!isLoading && (
+          <>
+            <p>{bio}</p>
+            <CopyButton bio={bio} />
+          </>
+        )}
       </CardContent>
     </Card>
   );
