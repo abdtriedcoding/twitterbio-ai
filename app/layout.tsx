@@ -1,7 +1,7 @@
 import "./globals.css";
 import { Toaster } from "sonner";
-import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
+import { constructMetadata } from "@/lib/utils";
 import { Analytics } from "@vercel/analytics/react";
 
 import Header from "@/components/header";
@@ -9,10 +9,7 @@ import Footer from "@/components/footer";
 
 const font = Poppins({ subsets: ["latin"], weight: ["500"] });
 
-export const metadata: Metadata = {
-  title: "twitterbio",
-  description: "Generate your Twitter bio using AI",
-};
+export const metadata = constructMetadata();
 
 export default function RootLayout({
   children,
