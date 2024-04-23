@@ -76,7 +76,7 @@ export function InfoForm() {
         : "Professional"
     } twitter biographies with no hashtags. Only return these 3 twitter bios strictly starting with a triangle symbol (▲ U+25B2), nothing else. ${
       vibe === "Funny" ? "Make the biographies humerous" : ""
-    }Make sure each generated biography is less than 20 characters, has short sentences that are found in Twitter bios, and feel free to use this context as well: ${job}`;
+    }Make sure each generated biography is less than 300 characters, has short sentences that are found in Twitter bios, and feel free to use this context as well: ${job}`;
 
     await complete(prompt);
     scrollToBios();
