@@ -2,6 +2,7 @@
 
 import { z } from "zod";
 import { toast } from "sonner";
+import { useRef } from "react";
 import TwitterBios from "./twitter-bios";
 import { useCompletion } from "ai/react";
 import { useForm } from "react-hook-form";
@@ -41,6 +42,14 @@ const formSchema = z.object({
 });
 
 export function InfoForm() {
+  const bioRef = useRef<null | HTMLDivElement>(null);
+
+  const scrollToBios = () => {
+    if (bioRef.current !== null) {
+      bioRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   const { complete, completion, isLoading } = useCompletion({
     onError: (e) => {
       toast.error(e.message);
@@ -56,7 +65,7 @@ export function InfoForm() {
   });
 
   // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof formSchema>) {
     const { job, vibe } = values;
 
     const prompt = `Begin each of the following with a triangle symbol (▲ U+25B2): Generate 3 ${
@@ -69,7 +78,8 @@ export function InfoForm() {
       vibe === "Funny" ? "Make the biographies humerous" : ""
     }Make sure each generated biography is less than 20 characters, has short sentences that are found in Twitter bios, and feel free to use this context as well: ${job}`;
 
-    complete(prompt);
+    await complete(prompt);
+    scrollToBios();
   }
 
   const bios = completion.split("▲").filter(Boolean);
@@ -141,7 +151,9 @@ export function InfoForm() {
           </Button>
         </form>
       </Form>
-      {bios.length > 0 && <TwitterBios isLoading={isLoading} bios={bios} />}
+      {bios.length > 0 && (
+        <TwitterBios bioRef={bioRef} isLoading={isLoading} bios={bios} />
+      )}
     </>
   );
 }
