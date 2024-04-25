@@ -36,7 +36,7 @@ export function constructMetadata({
       images: [image],
       creator: "@abdtriedcoding",
     },
-    metadataBase: new URL("https://twitterbio.vercel.app"),
+    metadataBase: new URL("https://twitterbios.vercel.app"),
     ...(noIndex && {
       robots: {
         index: false,
