@@ -1,7 +1,7 @@
 import "./globals.css";
 import { Toaster } from "sonner";
 import { Poppins } from "next/font/google";
-import { constructMetadata } from "@/lib/utils";
+import { cn, constructMetadata } from "@/lib/utils";
 import { Analytics } from "@vercel/analytics/react";
 
 import Header from "@/components/header";
@@ -18,9 +18,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={font.className}>
+      <body
+        className={cn(
+          "bg-gradient-to-br from-indigo-50 via-white to-cyan-100",
+          font.className
+        )}
+      >
         <Header />
-        <main className="min-h-full w-full p-4 flex flex-col items-center max-w-xl mx-auto space-y-5">
+        <main className="min-h-screen w-full p-4 flex flex-col items-center max-w-xl mx-auto space-y-5">
           <Toaster richColors theme="system" />
           {children}
           <Analytics />
