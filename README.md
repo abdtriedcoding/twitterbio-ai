@@ -1,12 +1,29 @@
-# twitterbio
+<div align="center">
+    <h1 align="center">twitterbio</h1>
+    <h5>Generate your next Twitter bio using AI in seconds! 🤖✨</h5>
+</div>
 
-This project generates Twitter (X) bios for you using AI.
+<div align="center">
+  <a href="https://x.com/abdtriedcoding/status/1784291070269894844">Demo of Build (https://x.com/abdtriedcoding/status/1784291070269894844)</a>
+</div>
+<br/>
 
-[![Twitter Bio Generator](https://files.edgestore.dev/j26azsoyqh7n72m2/myPublicImages/_public/8ee1e5fe-ee49-4d39-9270-9db979f6887a.png)](https://twitterbio.vercel.app)
+![Thumbnail](/public/thumbnail.png)
+
+Key Features:
+
+- Generate Twitter bio using AI ✨
+- Use of Claude, Anthropic AI 🤖
+- Use of Vercel AI SDK 🚀
+- Rate limiting feature using Upstash ⏳
 
 ## How it works
 
-This project uses both [Vercel AI Sdk](https://sdk.vercel.ai) and [Claude](https://claude.ai) with streaming to generate a Twitter bio. It constructs a prompt based on the form and user input, sends it either to the claude API, where vercel ai sdk helps in the streams the response back to the application.
+This project uses both [Vercel AI Sdk](https://sdk.vercel.ai) and [Claude](https://claude.ai) with streaming to generate Twitter bios. It constructs a prompt based on the form and user input, sends it either to the claude API, where vercel ai sdk helps in the streams the response back to the application.
+
+### Prerequisites
+
+**Node version 20.x.x**
 
 ## Running Locally
 
