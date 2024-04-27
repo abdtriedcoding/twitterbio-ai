@@ -144,7 +144,7 @@ export function InfoForm() {
             {isLoading && <Loader className="animate-spin h-5 w-5" />}
             {!isLoading && (
               <>
-                Generate your job
+                Generate your bio
                 <ArrowRight className="w-5 h-5" />
               </>
             )}
