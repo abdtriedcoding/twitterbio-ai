@@ -25,7 +25,7 @@ export default function RootLayout({
         )}
       >
         <Header />
-        <main className="min-h-screen w-full p-4 flex flex-col items-center max-w-xl mx-auto space-y-5">
+        <main className="min-h-screen w-full p-4 flex flex-col items-center max-w-xl mx-auto space-y-5 pt-12">
           <Toaster richColors theme="system" />
           {children}
           <Analytics />

@@ -63,8 +63,6 @@ export function InfoForm() {
     },
   });
 
-  const { reset } = form;
-
   async function onSubmit(values: z.infer<typeof formSchema>) {
     const { job, vibe } = values;
 
@@ -81,7 +79,6 @@ Each biography should be in the format of a single string within an array of exa
 
     await complete(prompt);
     scrollToBios();
-    reset();
   }
 
   let bios: string[] = [];
@@ -133,15 +130,10 @@ Each biography should be in the format of a single string within an array of exa
                 <Select
                   onValueChange={field.onChange}
                   defaultValue={field.value}
-                  value={field.value}
                 >
                   <FormControl>
                     <SelectTrigger>
-                      {field.value ? (
-                        <SelectValue placeholder="Select vibe" />
-                      ) : (
-                        "Select vibe"
-                      )}
+                      <SelectValue placeholder="Select vibe" />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
