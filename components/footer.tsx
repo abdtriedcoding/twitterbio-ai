@@ -16,16 +16,16 @@ export default function Footer() {
         </a>
         and{" "}
         <a
-          href="https://claude.ai"
+          href="https://ai.google.dev/gemini-api"
           target="_blank"
           rel="noreferrer"
           className="font-bold hover:underline transition underline-offset-2"
         >
-          Claude
+          Gemini
         </a>
       </div>
       <div className="flex items-center space-x-4">
-        <Link target="_blank" href="https://twitter.com/abdtriedcoding">
+        <Link target="_blank" href="https://x.com/abdtriedcoding">
           <Twitter className="w-5 h-5" />
         </Link>
         <Link target="_blank" href="https://github.com/abdtriedcoding">
