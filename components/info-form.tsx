@@ -6,9 +6,10 @@ import { useRef } from "react";
 import TwitterBios from "./twitter-bios";
 import { useCompletion } from "ai/react";
 import { useForm } from "react-hook-form";
-import { ArrowRight, Loader } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { ArrowRight, Loader2 } from "lucide-react";
+import { Textarea } from "@/components/ui/textarea";
 import { zodResolver } from "@hookform/resolvers/zod";
-
 import {
   Form,
   FormControl,
@@ -24,12 +25,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
 
 const formSchema = z.object({
   job: z
     .string()
+    .trim()
     .min(3, {
       message: "job must be at least 3 characters.",
     })
@@ -56,7 +56,6 @@ export function InfoForm() {
     },
   });
 
-  // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -64,25 +63,35 @@ export function InfoForm() {
     },
   });
 
-  // 2. Define a submit handler.
+  const { reset } = form;
+
   async function onSubmit(values: z.infer<typeof formSchema>) {
     const { job, vibe } = values;
 
-    const prompt = `Begin each of the following with a triangle symbol (▲ U+25B2): Generate 3 ${
+    const prompt = `Generate exactly 3 ${
       vibe === "Casual"
         ? "relaxed"
         : vibe === "Funny"
         ? "silly"
         : "Professional"
-    } twitter biographies with no hashtags. Only return these 3 twitter bios strictly starting with a triangle symbol (▲ U+25B2), nothing else. ${
-      vibe === "Funny" ? "Make the biographies humerous" : ""
-    }Make sure each generated biography is less than 300 characters, has short sentences that are found in Twitter bios, and feel free to use this context as well: ${job}`;
+    } Twitter biographies with no hashtags. 
+Each biography should be in the format of a single string within an array of exactly 3 strings, with no additional text or commentary. Ensure that each biography is less than 300 characters, composed of short, Twitter-friendly sentences. ${
+      vibe === "Funny" ? "Make the biographies humorous." : ""
+    } Use the context of the following job: ${job}`;
 
     await complete(prompt);
     scrollToBios();
+    reset();
   }
 
-  const bios = completion.split("▲").filter(Boolean);
+  let bios: string[] = [];
+
+  // Try to parse the completion into an array becasue by default value of completion is array
+  try {
+    bios = JSON.parse(completion);
+  } catch (e) {
+    bios = [];
+  }
 
   return (
     <>
@@ -124,10 +133,15 @@ export function InfoForm() {
                 <Select
                   onValueChange={field.onChange}
                   defaultValue={field.value}
+                  value={field.value}
                 >
                   <FormControl>
                     <SelectTrigger>
-                      <SelectValue placeholder="Select vibe" />
+                      {field.value ? (
+                        <SelectValue placeholder="Select vibe" />
+                      ) : (
+                        "Select vibe"
+                      )}
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
@@ -141,7 +155,7 @@ export function InfoForm() {
             )}
           />
           <Button disabled={isLoading} className="w-full" type="submit">
-            {isLoading && <Loader className="animate-spin h-5 w-5" />}
+            {isLoading && <Loader2 className="animate-spin h-5 w-5" />}
             {!isLoading && (
               <>
                 Generate your bio

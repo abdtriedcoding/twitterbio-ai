@@ -4,7 +4,7 @@ import { InfoForm } from "@/components/info-form";
 export default function Home() {
   return (
     <>
-      <Badge className="space-x-1 px-3 py-2 text-sm" variant="secondary">
+      <Badge className="space-x-1 px-3 py-2 text-sm bg-sky-400 hover:bg-sky-500">
         <b>26,299</b>
         <p>bios generated so far</p>
       </Badge>
